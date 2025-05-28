@@ -48,7 +48,7 @@ export const mockDestinations: Destination[] = [
     name: '경주',
     location: '대한민국 경상북도',
     description: `한국의 역사와 전통이 살아 숨쉬는 고도 경주는 신라의 수도로 천년의 역사를 간직한 도시입니다. UNESCO 세계문화유산으로 지정된 불국사와 석굴암을 비롯해 대릉원, 천마총, 첨성대, 안압지 등 수많은 역사 유적지가 도시 곳곳에 자리하고 있어 "살아있는 박물관"이라 불립니다. 고즈넉한 경주의 역사 유적지들을 둘러보며 한국의 찬란한 문화와 역사를 체험해보세요.`,
-    imageUrl: 'https://images.pexels.com/photos/19861777/pexels-photo-19861777/free-photo-of-gyeongju-in-the-winter.jpeg',
+    imageUrl: 'https://images.pexels.com/photos/29956379/pexels-photo-29956379.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
     tags: ['역사', '문화', '유적지', '전통', '힐링'],
     mbtiTypes: ['INTJ', 'INFJ', 'ISTJ', 'INTP'],
     mbtiReasons: {
