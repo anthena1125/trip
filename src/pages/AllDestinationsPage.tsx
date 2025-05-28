@@ -1,4 +1,5 @@
 // src/pages/AllDestinationsPage.tsx
+
 import { useState, useEffect } from 'react';
 import { getAllDestinations } from '../services/destinationService'; 
 import { Destination } from '../types/destination';
@@ -25,21 +26,21 @@ const DestinationCard = ({ destination }: DestinationCardProps) => {
         <img 
           src={destination.imageUrl} 
           alt={destination.name} 
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover" // ✨ 이 부분 className 속성값 따옴표 확인
         />
         <div className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black/60 to-transparent">
           <div className="flex justify-between items-end">
             <div>
               <h3 className="text-xl font-bold text-white">{destination.name}</h3>
               <div className="flex items-center text-white/90 text-sm">
-                <MapPin size={14} className="mr-1" />
+                <MapPin size={14} className="mr-1" /> {/* ✨ className 속성값 따옴표 확인 */}
                 <span>{destination.location}</span>
               </div>
             </div>
             <button
               onClick={toggleSave}
               title={isSaved ? '저장 취소' : '저장하기'}
-              className={`rounded-full p-2 ${
+              className={`rounded-full p-2 ${ // ✨ className 속성값 (백틱 사용) 확인
                 isSaved ? 'bg-indigo-500 text-white' : 'bg-white/80 text-gray-600'
               } hover:bg-indigo-500 hover:text-white transition-colors`}
             >
@@ -54,7 +55,7 @@ const DestinationCard = ({ destination }: DestinationCardProps) => {
           {destination.tags.map((tag, index) => (
             <span 
               key={index}
-              className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded"
+              className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded" // ✨ className 속성값 따옴표 확인
             >
               {tag}
             </span>
@@ -65,7 +66,7 @@ const DestinationCard = ({ destination }: DestinationCardProps) => {
         
         <Link 
           to={`/destinations/${destination.id}`}
-          className="mt-4 inline-block w-full text-center py-2 px-4 border border-transparent rounded-md text-sm font-medium text-indigo-600 bg-indigo-50 hover:bg-indigo-100 transition-colors"
+          className="mt-4 inline-block w-full text-center py-2 px-4 border border-transparent rounded-md text-sm font-medium text-indigo-600 bg-indigo-50 hover:bg-indigo-100 transition-colors" // ✨ className 속성값 따옴표 확인
         >
           상세 정보 보기
         </Link>
@@ -85,11 +86,19 @@ const AllDestinationsPage = () => {
       setIsLoading(true);
       setError(null);
       try {
-        const data = await getAllDestinations(); 
-        setDestinations(data);
+        console.log('Calling getAllDestinations from AllDestinationsPage...');
+        const data = await getAllDestinations();
+        console.log('Data received in AllDestinationsPage:', data);
+        if (data && data.length > 0) {
+          console.log('First item received in AllDestinationsPage:', data[0]?.name);
+          setDestinations(data);
+        } else {
+          console.warn('Received empty or invalid data from getAllDestinations in Page');
+          setDestinations([]);
+        }
       } catch (err) {
-        console.error('모든 여행지 로딩 실패:', err);
-        setError('여행지 정보를 불러오는 데 실패했습니다. 잠시 후 다시 시도해 주세요.');
+        console.error('Error fetching all destinations in AllDestinationsPage:', err);
+        setError('여행지 정보를 불러오는 데 실패했습니다. (Catch Block)');
       } finally {
         setIsLoading(false);
       }
@@ -101,6 +110,7 @@ const AllDestinationsPage = () => {
   if (isLoading) {
     return (
       <div className="flex justify-center py-20">
+        {/* ✨ div 태그가 올바르게 닫혔는지 확인 */}
         <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-indigo-500"></div>
       </div>
     );
@@ -134,7 +144,7 @@ const AllDestinationsPage = () => {
           <div className="flex items-center space-x-2 overflow-x-auto pb-2">
             <button
               onClick={() => setFilter('all')}
-              className={`px-3 py-1 rounded-full text-sm font-medium whitespace-nowrap ${
+              className={`px-3 py-1 rounded-full text-sm font-medium whitespace-nowrap ${ // ✨ className 속성값 (백틱 사용) 확인
                 filter === 'all'
                   ? 'bg-indigo-600 text-white'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
@@ -147,7 +157,7 @@ const AllDestinationsPage = () => {
               <button
                 key={tag}
                 onClick={() => setFilter(tag)}
-                className={`px-3 py-1 rounded-full text-sm font-medium whitespace-nowrap ${
+                className={`px-3 py-1 rounded-full text-sm font-medium whitespace-nowrap ${ // ✨ className 속성값 (백틱 사용) 확인
                   filter === tag
                     ? 'bg-indigo-600 text-white'
                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
@@ -166,7 +176,7 @@ const AllDestinationsPage = () => {
         </div>
       )}
 
-      {filteredDestinations.length === 0 && destinations.length > 0 && (
+      {filteredDestinations.length === 0 && destinations.length > 0 && !isLoading && !error && (
         <div className="text-center py-12 bg-gray-50 rounded-lg">
           <p className="text-lg text-gray-600">해당 필터에 맞는 여행지가 없습니다.</p>
         </div>
