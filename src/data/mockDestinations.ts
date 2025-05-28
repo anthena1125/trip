@@ -90,7 +90,7 @@ export const mockDestinations: Destination[] = [
     name: '부산',
     location: '대한민국 부산광역시',
     description: '한국 제2의 도시이자 대표적인 해양도시 부산은 아름다운 해변, 활기찬 시장, 맛있는 해산물, 독특한 도시 경관이 어우러진 곳입니다. 해운대, 광안리 해수욕장의 화려한 해변 풍경부터 자갈치 시장의 활기찬 모습, 감천문화마을의 알록달록한 집들, 깎아지른 절벽 위의 용궁사까지 다양한 매력을 지닌 부산에서 한국의 또 다른 면을 발견해보세요.',
-    imageUrl: 'https://images.pexels.com/photos/6508428/pexels-photo-6508428.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    imageUrl: 'https://images.pexels.com/photos/746486/pexels-photo-746486.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
     tags: ['도시', '해변', '맛집', '쇼핑', '축제'],
     mbtiTypes: ['ESTP', 'ESFP', 'ENTJ', 'ENFP'],
     mbtiReasons: {
