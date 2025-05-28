@@ -6,7 +6,7 @@ export const mockDestinations: Destination[] = [
     name: '제주도',
     location: '대한민국 제주특별자치도',
     description: '푸른 바다와 아름다운 자연이 어우러진 제주도는 한국의 대표적인 휴양지입니다. 한라산, 성산일출봉, 우도, 천지연폭포 등 다양한 자연 명소와 독특한 제주 문화를 경험할 수 있습니다. 제주 흑돼지, 해산물, 감귤 등 특산물을 맛볼 수 있으며, 올레길 걷기, 해변 산책, 스쿠버 다이빙 등 다채로운 액티비티를 즐길 수 있습니다.',
-    imageUrl: 'https://images.pexels.com/photos/4275885/pexels-photo-4275885.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    imageUrl: 'https://images.pexels.com/photos/29134982/pexels-photo-29134982.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
     tags: ['자연', '휴양', '액티비티', '해변', '맛집'],
     mbtiTypes: ['ENFP', 'ISFP', 'INFP', 'ESFP'],
     mbtiReasons: {
