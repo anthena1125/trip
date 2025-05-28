@@ -216,7 +216,7 @@ export const mockDestinations: Destination[] = [
     name: '전주 한옥마을',
     location: '대한민국 전라북도 전주시',
     description: '전통과 문화의 도시 전주의 한옥마을은 700여 채의 한옥이 밀집된 전통 마을입니다. 고즈넉한 한옥과 골목길을 거닐며 한국의 전통 문화와 역사를 체험할 수 있습니다. 전주 비빔밥, 한정식 등 맛있는 전통 음식을 맛볼 수 있으며, 한복 체험, 전통 공예 체험 등 다양한 문화 활동을 즐길 수 있습니다. 한국의 전통을 온전히 느낄 수 있는 전주 한옥마을에서 특별한 추억을 만들어보세요.',
-    imageUrl: 'https://images.pexels.com/photos/19932155/pexels-photo-19932155/free-photo-of-jeonju-at-night.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    imageUrl: 'https://images.pexels.com/photos/13885523/pexels-photo-13885523.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
     tags: ['전통', '문화', '역사', '맛집', '체험'],
     mbtiTypes: ['INFP', 'ISFJ', 'ESFJ', 'ENFJ'],
     mbtiReasons: {
