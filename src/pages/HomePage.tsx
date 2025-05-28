@@ -18,7 +18,7 @@ const HomePage = () => {
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute inset-0 bg-black opacity-30"></div>
           <img 
-            src="https://images.pexels.com/photos/2385210/pexels-photo-2385210.jpeg" 
+            src="https://images.pexels.com/photos/3278215/pexels-photo-3278215.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" 
             alt="여행 배경 이미지" 
             className="w-full h-full object-cover"
           />
