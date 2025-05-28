@@ -1821,3 +1821,48 @@ export const mockDestinations: Destination[] = [
     travelTips: ['리조트 선택이 매우 중요(위치, 시설, 포함 사항 확인), 프랑스어가 공용어지만 영어 통용, 타히티안 블랙펄 쇼핑, 자외선 차단 철저.']
   }
 ];
+// ✨ 모든 여행지 정보를 가져오는 함수 (수정)
+export const getAllDestinations = async (): Promise<Destination[]> => {
+  console.log('Fetching all destinations from service (using mock data)...');
+  return new Promise(resolve => setTimeout(() => resolve(mockDestinations), 300));
+};
+
+// ✨ MBTI 유형별 여행지 정보를 가져오는 함수 (수정)
+export const getMbtiDestinations = async (mbtiType: string): Promise<Destination[]> => {
+  console.log(`Fetching destinations for MBTI: ${mbtiType} from service (using mock data)...`);
+  const filtered = mockDestinations.filter(dest => dest.mbtiTypes.includes(mbtiType.toUpperCase()));
+  return new Promise(resolve => setTimeout(() => resolve(filtered), 300));
+};
+
+// ✨ ID로 특정 여행지 정보를 가져오는 함수 (수정)
+export const getDestinationById = async (id: string): Promise<Destination | null> => {
+  console.log(`Fetching destination by ID: ${id} from service (using mock data)...`);
+  const destination = mockDestinations.find(dest => dest.id === id) || null;
+  return new Promise(resolve => setTimeout(() => resolve(destination), 300));
+};
+
+// MyPage.tsx 등에서 사용될 수 있는 함수들 (선택적 수정)
+export const getSavedDestinations = async (userId: string): Promise<Destination[]> => {
+  console.log(`Fetching saved destinations for user: ${userId} (mock)`);
+  // 실제 로직에서는 userId를 사용해야 하지만, 여기서는 mock 데이터 일부를 반환합니다.
+  return new Promise(resolve => setTimeout(() => resolve(
+    mockDestinations.slice(0, 2).map(d => ({...d, savedDate: new Date().toLocaleDateString()}))
+  ), 300));
+};
+
+export const getLikedDestinations = async (userId: string): Promise<Destination[]> => {
+  console.log(`Fetching liked destinations for user: ${userId} (mock)`);
+  return new Promise(resolve => setTimeout(() => resolve(
+    mockDestinations.slice(2, 4).map(d => ({...d, likedDate: new Date().toLocaleDateString()}))
+  ), 300));
+};
+
+export const unsaveDestination = async (userId: string, destinationId: string): Promise<void> => {
+  console.log(`Unsaving destination ${destinationId} for user ${userId} (mock)`);
+  return new Promise(resolve => setTimeout(resolve, 300));
+};
+
+export const unlikeDestination = async (userId: string, destinationId: string): Promise<void> => {
+  console.log(`Unliking destination ${destinationId} for user ${userId} (mock)`);
+  return new Promise(resolve => setTimeout(resolve, 300));
+};
