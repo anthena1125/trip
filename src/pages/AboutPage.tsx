@@ -213,27 +213,7 @@ const AboutPage = () => {
         </div>
       </div>
       
-      {/* CTA 섹션 */}
-      <div className="bg-gradient-to-r from-indigo-600 to-purple-600 rounded-2xl p-8 md:p-12 text-center text-white">
-        <h2 className="text-3xl font-bold mb-4">지금 바로 시작하세요!</h2>
-        <p className="text-xl mb-8 max-w-3xl mx-auto">
-          여러분의 MBTI에 딱 맞는 특별한 여행지를 발견하고, 잊지 못할 여행 경험을 만들어보세요.
-        </p>
-        <div className="flex flex-wrap justify-center gap-4">
-          <Link 
-            to="/register"
-            className="px-6 py-3 bg-white text-indigo-700 rounded-lg font-medium shadow-lg hover:bg-gray-100 transition duration-300"
-          >
-            회원가입하기
-          </Link>
-          <Link 
-            to="/"
-            className="px-6 py-3 bg-transparent border-2 border-white text-white rounded-lg font-medium hover:bg-white/10 transition duration-300"
-          >
-            여행지 둘러보기
-          </Link>
-        </div>
-      </div>
+      
     </div>
   );
 };
