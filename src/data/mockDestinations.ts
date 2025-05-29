@@ -1727,7 +1727,7 @@ export const mockDestinations: Destination[] = [
   },
   {
     id: '52',
-    name: '교토 (Kyoto) - (중복 데이터지만 id 및 약간의 내용 차별화 가능. 이미 9번에 있음)',
+    name: '교토 (Kyoto) ',
     location: '일본 (Japan)',
     description: '일본의 옛 수도 교토는 금각사, 청수사, 기온 거리 등 수많은 전통 사찰과 정원, 게이샤 문화가 살아 숨 쉬는 곳입니다. 아라시야마 대나무 숲을 거닐거나, 니시키 시장에서 현지 음식을 맛보세요.',
     imageUrl: 'https://images.pexels.com/photos/161337/pexels-photo-161337.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
