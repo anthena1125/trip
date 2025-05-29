@@ -157,16 +157,6 @@ const HomePage = () => {
               </p>
             </div>
           </div>
-          
-          <div className="text-center mt-10">
-            <Link 
-              to="/register"
-              className="inline-flex items-center px-6 py-3 bg-indigo-600 text-white rounded-lg font-medium hover:bg-indigo-700 transition duration-300"
-            >
-              지금 시작하기
-              <Compass size={20} className="ml-2" />
-            </Link>
-          </div>
         </div>
       </section>
     </div>
