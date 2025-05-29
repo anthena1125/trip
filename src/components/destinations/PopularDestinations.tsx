@@ -8,6 +8,7 @@ import { useAuth } from '../../contexts/AuthContext';
 const PopularDestinations = () => {
   const [destinations, setDestinations] = useState<Destination[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [savedDestinations, setSavedDestinations] = useState<Set<string>>(new Set());
 
   useEffect(() => {
     const fetchDestinations = async () => {
@@ -35,7 +36,12 @@ const PopularDestinations = () => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {destinations.map((destination) => (
-        <DestinationCard key={destination.id} destination={destination} />
+        <DestinationCard 
+          key={destination.id} 
+          destination={destination}
+          savedDestinations={savedDestinations}
+          setSavedDestinations={setSavedDestinations}
+        />
       ))}
     </div>
   );
@@ -43,30 +49,37 @@ const PopularDestinations = () => {
 
 interface DestinationCardProps {
   destination: Destination;
+  savedDestinations: Set<string>;
+  setSavedDestinations: React.Dispatch<React.SetStateAction<Set<string>>>;
 }
 
-const DestinationCard = ({ destination }: DestinationCardProps) => {
+const DestinationCard = ({ destination, savedDestinations, setSavedDestinations }: DestinationCardProps) => {
   const { user } = useAuth();
   const [isLiked, setIsLiked] = useState(false);
-  const [isSaved, setIsSaved] = useState(false);
-  const [isProcessing, setIsProcessing] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
+  const isSaved = savedDestinations.has(destination.id);
 
   const handleSave = async (e: React.MouseEvent) => {
     e.preventDefault();
-    if (!user || isProcessing) return;
+    if (!user || isSaving) return;
 
-    setIsProcessing(true);
+    setIsSaving(true);
     try {
       if (isSaved) {
         await unsaveDestination(user.id, destination.id);
+        setSavedDestinations(prev => {
+          const newSet = new Set(prev);
+          newSet.delete(destination.id);
+          return newSet;
+        });
       } else {
         await saveDestination(user.id, destination.id);
+        setSavedDestinations(prev => new Set([...prev, destination.id]));
       }
-      setIsSaved(!isSaved);
     } catch (error) {
       console.error('Error saving destination:', error);
     } finally {
-      setIsProcessing(false);
+      setIsSaving(false);
     }
   };
 
@@ -88,11 +101,11 @@ const DestinationCard = ({ destination }: DestinationCardProps) => {
           <div className="absolute top-3 right-3 flex gap-2">
             <button
               onClick={handleSave}
-              disabled={isProcessing}
+              disabled={isSaving}
               className={`rounded-full p-2 ${
                 isSaved ? 'bg-indigo-500 text-white' : 'bg-white/80 text-gray-600'
               } hover:bg-indigo-500 hover:text-white transition-colors ${
-                isProcessing ? 'opacity-50 cursor-not-allowed' : ''
+                isSaving ? 'opacity-50 cursor-not-allowed' : ''
               }`}
             >
               <BookmarkPlus size={18} fill={isSaved ? 'currentColor' : 'none'} />
