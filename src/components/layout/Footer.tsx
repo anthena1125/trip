@@ -34,7 +34,7 @@ const Footer = () => {
           <div>
             <h4 className="font-bold mb-4">문의하기</h4>
             <p className="text-gray-300 mb-2">문의사항이 있으신가요?</p>
-            <p className="text-gray-300 mb-4">이메일: info@mbtitravel.kr</p>
+            <p className="text-gray-300 mb-4">이메일: abc@wku.ac.kr</p>
             <div className="flex space-x-4">
               <a href="#" className="text-gray-300 hover:text-white">
                 <span className="sr-only">Instagram</span>
