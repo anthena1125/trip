@@ -1,10 +1,9 @@
-// src/pages/AllDestinationsPage.tsx
-
 import { useState, useEffect } from 'react';
-import { getAllDestinations } from '../services/destinationService'; 
+import { Link } from 'react-router-dom';
+import { getAllDestinations, saveDestination, unsaveDestination } from '../services/destinationService';
 import { Destination } from '../types/destination';
 import { BookmarkPlus, MapPin } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
 
 interface DestinationCardProps {
   destination: Destination;
@@ -12,66 +11,80 @@ interface DestinationCardProps {
 
 const DestinationCard = ({ destination }: DestinationCardProps) => {
   const [isSaved, setIsSaved] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
+  const { user } = useAuth();
 
-  const toggleSave = (e: React.MouseEvent) => {
+  const handleSave = async (e: React.MouseEvent) => {
     e.preventDefault();
-    setIsSaved(!isSaved);
-    console.log(`${destination.name} 저장 상태 변경: ${!isSaved}`);
-    // 실제 저장/해제 API 호출 로직 필요
+    if (!user || isSaving) return;
+
+    setIsSaving(true);
+    try {
+      if (isSaved) {
+        await unsaveDestination(user.id, destination.id);
+        setIsSaved(false);
+      } else {
+        await saveDestination(user.id, destination.id);
+        setIsSaved(true);
+      }
+    } catch (error) {
+      console.error('Error saving destination:', error);
+    } finally {
+      setIsSaving(false);
+    }
   };
 
   return (
-    <div className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow">
-      <div className="relative h-56 overflow-hidden">
-        <img 
-          src={destination.imageUrl} 
-          alt={destination.name} 
-          className="w-full h-full object-cover" // ✨ 이 부분 className 속성값 따옴표 확인
-        />
-        <div className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black/60 to-transparent">
-          <div className="flex justify-between items-end">
-            <div>
-              <h3 className="text-xl font-bold text-white">{destination.name}</h3>
-              <div className="flex items-center text-white/90 text-sm">
-                <MapPin size={14} className="mr-1" /> {/* ✨ className 속성값 따옴표 확인 */}
-                <span>{destination.location}</span>
+    <Link to={`/destinations/${destination.id}`} className="group">
+      <div className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow">
+        <div className="relative h-56 overflow-hidden">
+          <img 
+            src={destination.imageUrl} 
+            alt={destination.name} 
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+          />
+          <div className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black/60 to-transparent">
+            <div className="flex justify-between items-end">
+              <div>
+                <h3 className="text-xl font-bold text-white">{destination.name}</h3>
+                <div className="flex items-center text-white/90 text-sm">
+                  <MapPin size={14} className="mr-1" />
+                  <span>{destination.location}</span>
+                </div>
               </div>
+              {user && (
+                <button
+                  onClick={handleSave}
+                  disabled={isSaving}
+                  className={`rounded-full p-2 ${
+                    isSaved ? 'bg-indigo-500 text-white' : 'bg-white/80 text-gray-600'
+                  } hover:bg-indigo-500 hover:text-white transition-colors ${
+                    isSaving ? 'opacity-50 cursor-not-allowed' : ''
+                  }`}
+                >
+                  <BookmarkPlus size={18} fill={isSaved ? 'currentColor' : 'none'} />
+                </button>
+              )}
             </div>
-            <button
-              onClick={toggleSave}
-              title={isSaved ? '저장 취소' : '저장하기'}
-              className={`rounded-full p-2 ${ // ✨ className 속성값 (백틱 사용) 확인
-                isSaved ? 'bg-indigo-500 text-white' : 'bg-white/80 text-gray-600'
-              } hover:bg-indigo-500 hover:text-white transition-colors`}
-            >
-              <BookmarkPlus size={18} fill={isSaved ? 'currentColor' : 'none'} />
-            </button>
           </div>
         </div>
-      </div>
-      
-      <div className="p-4">
-        <div className="flex flex-wrap gap-2 mb-3">
-          {destination.tags.map((tag, index) => (
-            <span 
-              key={index}
-              className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded" // ✨ className 속성값 따옴표 확인
-            >
-              {tag}
-            </span>
-          ))}
+        
+        <div className="p-4">
+          <div className="flex flex-wrap gap-2 mb-3">
+            {destination.tags.map((tag, index) => (
+              <span 
+                key={index}
+                className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+          
+          <p className="text-gray-600 mb-4 line-clamp-2">{destination.description}</p>
         </div>
-        
-        <p className="text-gray-600 mb-4 line-clamp-3">{destination.description}</p>
-        
-        <Link 
-          to={`/destinations/${destination.id}`}
-          className="mt-4 inline-block w-full text-center py-2 px-4 border border-transparent rounded-md text-sm font-medium text-indigo-600 bg-indigo-50 hover:bg-indigo-100 transition-colors" // ✨ className 속성값 따옴표 확인
-        >
-          상세 정보 보기
-        </Link>
       </div>
-    </div>
+    </Link>
   );
 };
 
@@ -86,19 +99,11 @@ const AllDestinationsPage = () => {
       setIsLoading(true);
       setError(null);
       try {
-        console.log('Calling getAllDestinations from AllDestinationsPage...');
         const data = await getAllDestinations();
-        console.log('Data received in AllDestinationsPage:', data);
-        if (data && data.length > 0) {
-          console.log('First item received in AllDestinationsPage:', data[0]?.name);
-          setDestinations(data);
-        } else {
-          console.warn('Received empty or invalid data from getAllDestinations in Page');
-          setDestinations([]);
-        }
+        setDestinations(data);
       } catch (err) {
-        console.error('Error fetching all destinations in AllDestinationsPage:', err);
-        setError('여행지 정보를 불러오는 데 실패했습니다. (Catch Block)');
+        console.error('Error fetching all destinations:', err);
+        setError('여행지 정보를 불러오는 데 실패했습니다.');
       } finally {
         setIsLoading(false);
       }
@@ -110,7 +115,6 @@ const AllDestinationsPage = () => {
   if (isLoading) {
     return (
       <div className="flex justify-center py-20">
-        {/* ✨ div 태그가 올바르게 닫혔는지 확인 */}
         <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-indigo-500"></div>
       </div>
     );
@@ -144,7 +148,7 @@ const AllDestinationsPage = () => {
           <div className="flex items-center space-x-2 overflow-x-auto pb-2">
             <button
               onClick={() => setFilter('all')}
-              className={`px-3 py-1 rounded-full text-sm font-medium whitespace-nowrap ${ // ✨ className 속성값 (백틱 사용) 확인
+              className={`px-3 py-1 rounded-full text-sm font-medium whitespace-nowrap ${
                 filter === 'all'
                   ? 'bg-indigo-600 text-white'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
@@ -157,7 +161,7 @@ const AllDestinationsPage = () => {
               <button
                 key={tag}
                 onClick={() => setFilter(tag)}
-                className={`px-3 py-1 rounded-full text-sm font-medium whitespace-nowrap ${ // ✨ className 속성값 (백틱 사용) 확인
+                className={`px-3 py-1 rounded-full text-sm font-medium whitespace-nowrap ${
                   filter === tag
                     ? 'bg-indigo-600 text-white'
                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
