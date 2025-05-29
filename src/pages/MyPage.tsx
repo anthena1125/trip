@@ -69,8 +69,6 @@ const MyPage = () => {
     }
   };
 
-  // "좋아요 취소" 핸들러 함수 제거
-  // const handleUnlike = async (destinationId: string) => { ... };
 
   if (!user || !profile) { // 사용자와 프로필 모두 로드될 때까지 로딩 또는 메시지 표시
     // AuthContext의 isLoading 상태를 활용하여 더 정교한 로딩 UI 표시 가능
@@ -157,7 +155,6 @@ const MyPage = () => {
                 <Map size={18} className="mr-2" />
                 저장한 여행지
               </button>
-              {/* "좋아요한 여행지" 탭 버튼 제거 */}
               <button
                 onClick={() => setActiveTab('settings')}
                 className={`flex items-center w-full px-3 py-2 rounded-md text-sm font-medium transition-colors ${
@@ -249,30 +246,7 @@ const MyPage = () => {
                   </select>
                 </div>
                 
-                {/* 선호하는 여행 스타일은 현재 DB와 연동되지 않으므로 UI만 남기거나 주석 처리/삭제 */}
-                {/*
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    선호하는 여행 스타일 (구현 예정)
-                  </label>
-                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-                    {['자연/풍경', '역사/문화', '음식/맛집', '쇼핑', '액티비티', '휴양/힐링', '예술/건축', '축제/이벤트'].map((style) => (
-                      <div key={style} className="flex items-center">
-                        <input
-                          id={`style-${style}`}
-                          type="checkbox"
-                          checked={formData.travelStyles.includes(style)}
-                          onChange={() => handleTravelStyleChange(style)}
-                          className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
-                        />
-                        <label htmlFor={`style-${style}`} className="ml-2 text-sm text-gray-700">
-                          {style}
-                        </label>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-                */}
+                
                 
                 <div className="pt-4">
                   <button 
@@ -347,7 +321,6 @@ const MyPage = () => {
             </div>
           )}
           
-          {/* "좋아요한 여행지" 탭 콘텐츠 전체 제거 */}
           
           {activeTab === 'settings' && (
             <div className="bg-white rounded-lg shadow-sm p-6">
