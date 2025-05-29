@@ -28,8 +28,6 @@ const Footer = () => {
             <h4 className="font-bold mb-4">정보</h4>
             <ul className="space-y-2">
               <li><Link to="/about" className="text-gray-300 hover:text-white">소개</Link></li>
-              <li><Link to="/privacy" className="text-gray-300 hover:text-white">개인정보처리방침</Link></li>
-              <li><Link to="/terms" className="text-gray-300 hover:text-white">이용약관</Link></li>
             </ul>
           </div>
           
