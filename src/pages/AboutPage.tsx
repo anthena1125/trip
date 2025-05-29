@@ -150,7 +150,7 @@ const AboutPage = () => {
                 <Mail className="w-5 h-5 text-indigo-600 mt-1 mr-3" />
                 <div>
                   <h4 className="font-medium">이메일</h4>
-                  <p className="text-gray-600">info@mbtitravel.kr</p>
+                  <p className="text-gray-600">abc@wku.ac.kr</p>
                 </div>
               </div>
               
@@ -158,7 +158,7 @@ const AboutPage = () => {
                 <MapPin className="w-5 h-5 text-indigo-600 mt-1 mr-3" />
                 <div>
                   <h4 className="font-medium">주소</h4>
-                  <p className="text-gray-600">서울특별시 강남구 테헤란로 123 여행빌딩 4층</p>
+                  <p className="text-gray-600">대한민국</p>
                 </div>
               </div>
             </div>
