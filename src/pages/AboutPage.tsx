@@ -79,60 +79,7 @@ const AboutPage = () => {
         </div>
       </div>
       
-      {/* 팀 소개 섹션 */}
-      <div className="max-w-5xl mx-auto mb-16">
-        <h2 className="text-3xl font-bold mb-8 text-center">팀 소개</h2>
-        
-        <div className="grid md:grid-cols-3 gap-8">
-          <div className="bg-white p-6 rounded-lg shadow-sm text-center">
-            <div className="w-24 h-24 bg-gray-200 rounded-full mx-auto mb-4 overflow-hidden">
-              <img 
-                src="https://images.pexels.com/photos/3778603/pexels-photo-3778603.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" 
-                alt="팀원 1" 
-                className="w-full h-full object-cover"
-              />
-            </div>
-            <h3 className="text-xl font-bold mb-1">김여행</h3>
-            <p className="text-indigo-600 mb-3">CEO & 창립자</p>
-            <p className="text-gray-600 mb-3">ENFP | 세계 여행가</p>
-            <p className="text-gray-600 text-sm">
-              "모든 여행에는 그 사람만의 의미가 있습니다. 우리는 그 의미를 찾아드립니다."
-            </p>
-          </div>
-          
-          <div className="bg-white p-6 rounded-lg shadow-sm text-center">
-            <div className="w-24 h-24 bg-gray-200 rounded-full mx-auto mb-4 overflow-hidden">
-              <img 
-                src="https://images.pexels.com/photos/5378700/pexels-photo-5378700.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" 
-                alt="팀원 2" 
-                className="w-full h-full object-cover"
-              />
-            </div>
-            <h3 className="text-xl font-bold mb-1">이성격</h3>
-            <p className="text-indigo-600 mb-3">MBTI 전문가</p>
-            <p className="text-gray-600 mb-3">INTJ | 심리학 박사</p>
-            <p className="text-gray-600 text-sm">
-              "MBTI와 여행의 연결점에서 개인에게 가장 적합한 경험을 발견합니다."
-            </p>
-          </div>
-          
-          <div className="bg-white p-6 rounded-lg shadow-sm text-center">
-            <div className="w-24 h-24 bg-gray-200 rounded-full mx-auto mb-4 overflow-hidden">
-              <img 
-                src="https://images.pexels.com/photos/8107039/pexels-photo-8107039.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" 
-                alt="팀원 3" 
-                className="w-full h-full object-cover"
-              />
-            </div>
-            <h3 className="text-xl font-bold mb-1">박웹디</h3>
-            <p className="text-indigo-600 mb-3">개발 책임자</p>
-            <p className="text-gray-600 mb-3">ISFJ | 풀스택 개발자</p>
-            <p className="text-gray-600 text-sm">
-              "기술을 통해 여행자와 목적지를 완벽하게 연결하는 것이 목표입니다."
-            </p>
-          </div>
-        </div>
-      </div>
+    
       
       {/* 연락처 섹션 */}
       <div className="max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-sm mb-16">
